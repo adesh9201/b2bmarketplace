@@ -50,6 +50,12 @@ body {
   background: #fff !important;
   box-shadow: 0 2px 10px rgba(44,62,80,0.06);
 }
+.navbar-toggler {
+  border-color: #181C22; /* Button border color bhi same karna hai */
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(24,28,34,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
 .navbar-brand, .navbar .nav-link, .navbar .btn-outline-light, .navbar .btn-outline-primary, .navbar-toggler, .navbar-toggler-icon {
   color: #181C22 !important;
   fill: #181C22 !important;
