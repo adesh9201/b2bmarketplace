@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!Array.isArray(products)) return;
 
   grid.innerHTML = products.map(product => `
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
       <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll h-100">
         <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
           <img src="${product.image}" alt="${product.name}" class="img-fluid featured-img">
