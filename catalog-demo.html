@@ -82,63 +82,123 @@
   <div class="container mb-5" style="margin-top: 100px;">
     <div class="row">
       <!-- Sidebar Filters (desktop) / Collapsible (mobile) -->
-      <aside class="col-lg-3 mb-4 d-none d-md-block">
-        <div class="card glassmorphic shadow-sm mb-4">
-          <div class="card-body">
-            <h5 class="fw-bold mb-3" style="color:#0a2342;">Filters</h5>
-            <form id="catalogFilters">
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Category</label>
-                <select class="form-select" id="filterCategory">
-                  <option value="">All</option>
-                  <!-- Categories will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Price Range</label>
-                <div class="d-flex align-items-center gap-2">
-                  <input type="number" class="form-control" id="filterPriceMin" placeholder="Min" min="0">
-                  <span>-</span>
-                  <input type="number" class="form-control" id="filterPriceMax" placeholder="Max" min="0">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Color</label>
-                <select class="form-select" id="filterColor">
-                  <option value="">All</option>
-                  <!-- Colors will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Material</label>
-                <select class="form-select" id="filterMaterial">
-                  <option value="">All</option>
-                  <!-- Materials will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Supplier</label>
-                <select class="form-select" id="filterSupplier">
-                  <option value="">All</option>
-                  <!-- Suppliers will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Rating</label>
-                <select class="form-select" id="filterRating">
-                  <option value="">All</option>
-                  <option value="4">4 stars & up</option>
-                  <option value="3">3 stars & up</option>
-                  <option value="2">2 stars & up</option>
-                  <option value="1">1 star & up</option>
-                </select>
-              </div>
-              <button type="button" class="btn btn-gold w-100 mt-2" id="applyFilters">Apply Filters</button>
-              <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">Reset</button>
-            </form>
+<aside class="col-lg-3 mb-4">
+  <div class="card glassmorphic shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold mb-3" style="color:#0a2342;">Filters</h5>
+      <form id="catalogFilters">
+        
+        <!-- Category -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Category</label>
+          <select class="form-select" id="filterCategory">
+            <option value="">All</option>
+            <option value="Cotton">Cotton</option>
+            <option value="Silk">Silk</option>
+            <option value="Wool">Wool</option>
+            <option value="Synthetic">Synthetic</option>
+            <option value="Linen">Linen</option>
+            <option value="Velvet">Velvet</option>
+            <option value="Bamboo">Bamboo</option>
+            <option value="Denim">Denim</option>
+          </select>
+        </div>
+
+        <!-- Price Range -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Price Range</label>
+          <div class="d-flex align-items-center gap-2">
+            <input type="number" class="form-control" id="filterPriceMin" placeholder="Min" min="0">
+            <span>-</span>
+            <input type="number" class="form-control" id="filterPriceMax" placeholder="Max" min="0">
           </div>
         </div>
-      </aside>
+
+        <!-- Color -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Color</label>
+          <select class="form-select" id="filterColor">
+            <option value="">All</option>
+            <option value="White">White</option>
+            <option value="Blue">Blue</option>
+            <option value="Red">Red</option>
+            <option value="Green">Green</option>
+            <option value="Ivory">Ivory</option>
+            <option value="Black">Black</option>
+            <option value="Rose Gold">Rose Gold</option>
+            <option value="Navy">Navy</option>
+            <option value="Charcoal">Charcoal</option>
+            <option value="Brown">Brown</option>
+            <option value="Natural">Natural</option>
+            <option value="Beige">Beige</option>
+            <option value="Sage">Sage</option>
+            <option value="Emerald">Emerald</option>
+            <option value="Gold">Gold</option>
+            <option value="Olive">Olive</option>
+            <option value="Indigo">Indigo</option>
+            <option value="Champagne">Champagne</option>
+            <option value="Silver">Silver</option>
+            <option value="Rose">Rose</option>
+            <option value="Sky Blue">Sky Blue</option>
+            <option value="Gray">Gray</option>
+          </select>
+        </div>
+
+        <!-- Material -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Material</label>
+          <select class="form-select" id="filterMaterial">
+            <option value="">All</option>
+            <option value="100% Cotton">100% Cotton</option>
+            <option value="100% Silk">100% Silk</option>
+            <option value="70% Wool, 30% Polyester">70% Wool, 30% Polyester</option>
+            <option value="100% Polyester">100% Polyester</option>
+            <option value="55% Linen, 45% Cotton">55% Linen, 45% Cotton</option>
+            <option value="95% Bamboo, 5% Spandex">95% Bamboo, 5% Spandex</option>
+            <option value="70% Silk, 30% Viscose">70% Silk, 30% Viscose</option>
+            <option value="100% Linen">100% Linen</option>
+            <option value="100% Wool">100% Wool</option>
+          </select>
+        </div>
+
+        <!-- Supplier -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Supplier</label>
+          <select class="form-select" id="filterSupplier">
+            <option value="">All</option>
+            <option value="TextileCorp">TextileCorp</option>
+            <option value="LuxuryFabrics">LuxuryFabrics</option>
+            <option value="ProfessionalTextiles">ProfessionalTextiles</option>
+            <option value="ActiveFabrics">ActiveFabrics</option>
+            <option value="NaturalTextiles">NaturalTextiles</option>
+            <option value="EcoFabrics">EcoFabrics</option>
+            <option value="DenimMakers">DenimMakers</option>
+            <option value="HeritageWeaves">HeritageWeaves</option>
+          </select>
+        </div>
+
+        <!-- Rating -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Rating</label>
+          <select class="form-select" id="filterRating">
+            <option value="">All</option>
+            <option value="4">4 stars & up</option>
+            <option value="3">3 stars & up</option>
+            <option value="2">2 stars & up</option>
+            <option value="1">1 star & up</option>
+          </select>
+        </div>
+
+        <!-- Buttons -->
+        <button type="button" class="btn btn-gold w-100 mt-2" id="applyFilters">Apply Filters</button>
+        <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">Reset</button>
+      </form>
+    </div>
+  </div>
+</aside>
+
+
+      
       <main class="col-lg-9">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
           <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>

@@ -82,63 +82,90 @@
   <div class="container mb-5" style="margin-top: 100px;">
     <div class="row">
       <!-- Sidebar Filters (desktop) / Collapsible (mobile) -->
-      <aside class="col-lg-3 mb-4">
-        <div class="card glassmorphic shadow-sm mb-4">
-          <div class="card-body">
-            <h5 class="fw-bold mb-3" style="color:#0a2342;">Filters</h5>
-            <form id="catalogFilters">
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Category</label>
-                <select class="form-select" id="filterCategory">
-                  <option value="">All</option>
-                  <!-- Categories will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Price Range</label>
-                <div class="d-flex align-items-center gap-2">
-                  <input type="number" class="form-control" id="filterPriceMin" placeholder="Min" min="0">
-                  <span>-</span>
-                  <input type="number" class="form-control" id="filterPriceMax" placeholder="Max" min="0">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Color</label>
-                <select class="form-select" id="filterColor">
-                  <option value="">All</option>
-                  <!-- Colors will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Material</label>
-                <select class="form-select" id="filterMaterial">
-                  <option value="">All</option>
-                  <!-- Materials will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Supplier</label>
-                <select class="form-select" id="filterSupplier">
-                  <option value="">All</option>
-                  <!-- Suppliers will be populated by JS -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Rating</label>
-                <select class="form-select" id="filterRating">
-                  <option value="">All</option>
-                  <option value="4">4 stars & up</option>
-                  <option value="3">3 stars & up</option>
-                  <option value="2">2 stars & up</option>
-                  <option value="1">1 star & up</option>
-                </select>
-              </div>
-              <button type="button" class="btn btn-gold w-100 mt-2" id="applyFilters">Apply Filters</button>
-              <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">Reset</button>
-            </form>
+<aside class="col-lg-3 mb-4">
+  <div class="card glassmorphic shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold mb-3" style="color:#0a2342;">Filters</h5>
+      <form id="catalogFilters">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Category</label>
+          <select class="form-select" id="filterCategory">
+            <option value="">All</option>
+            <option value="fabric">Fabric</option>
+            <option value="trims">Trims & Embellishments</option>
+            <option value="notions">Notions & Fasteners</option>
+            <option value="thread">Thread & Yarn</option>
+            <option value="accessories">Apparel Accessories Raw</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Price Range</label>
+          <div class="d-flex align-items-center gap-2">
+            <input type="number" class="form-control" id="filterPriceMin" placeholder="Min" min="0">
+            <span>-</span>
+            <input type="number" class="form-control" id="filterPriceMax" placeholder="Max" min="0">
           </div>
         </div>
-      </aside>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Color</label>
+          <select class="form-select" id="filterColor">
+            <option value="">All</option>
+            <option value="pink">Pink</option>
+            <option value="lavender">Lavender</option>
+            <option value="yellow">Yellow</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+            <option value="cream">Cream</option>
+            <option value="peach">Peach</option>
+            <option value="multi-color">Multi-color</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Material</label>
+          <select class="form-select" id="filterMaterial">
+            <option value="">All</option>
+            <option value="cotton">Cotton</option>
+            <option value="jersey">Jersey</option>
+            <option value="denim">Denim</option>
+            <option value="linen">Linen</option>
+            <option value="silk">Silk</option>
+            <option value="rayon">Rayon/Viscose</option>
+            <option value="velvet">Velvet</option>
+            <option value="fleece">Fleece</option>
+
+            </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Supplier</label>
+          <select class="form-select" id="filterSupplier">
+            <option value="">All</option>
+            <option value="tulle">A</option>
+            <option value="satin">B</option>
+            <option value="chiffon">C</option>
+            <option value="wool">D</option>
+            <option value="polyester">E</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Rating</label>
+          <select class="form-select" id="filterRating">
+            <option value="">All</option>
+            <option value="4">4 stars & up</option>
+            <option value="3">3 stars & up</option>
+            <option value="2">2 stars & up</option>
+            <option value="1">1 star & up</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-gold w-100 mt-2" id="applyFilters">Apply Filters</button>
+        <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">Reset</button>
+      </form>
+    </div>
+  </div>
+</aside>
+
+      
       <main class="col-lg-9">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
           <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>
