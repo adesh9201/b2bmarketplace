@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FabricHub Inventory Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Inter and Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Brand Colors (Minimal CSS) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light background */
+            color: #333;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-primary-dark { /* Your main brand blue */
+            background-color: #0a2342 !important;
+        }
+        .text-primary-dark {
+            color: #0a2342 !important;
+        }
+        .btn-gold { /* Your custom gold button style */
+            background: linear-gradient(to right, #a67c00, #bfa046);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 0.5rem; /* Slightly rounded */
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .btn-gold:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            color: #fff;
+        }
+        .btn-outline-gold { /* Your custom outline gold button style */
+            color: #a67c00;
+            border-color: #a67c00;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-outline-gold:hover {
+            background-color: #a67c00;
+            color: #fff;
+        }
+        .text-gold { /* For text that was #bfa046 */
+            color: #bfa046 !important;
+        }
+        .card-header-custom { /* For custom card header colors */
+            background-color: #f0f2f5; /* Light gray for headers */
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table thead th {
+            background-color: #e9ecef; /* Light gray for table headers */
+            color: #495057;
+        }
+        /* Adjustments for forms */
+        .form-control, .form-select {
+            border-radius: 0.375rem; /* Bootstrap default */
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navigation Bar (Optional, but good for context) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2 font-poppins" href="#">
+                <i class="fas fa-warehouse"></i> FabricHub Inventory
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid p-4">
+        <h2 class="mb-4 text-primary-dark font-poppins">Inventory Dashboard</h2>
+
+        <!-- ✅ 1. Inventory Summary Cards -->
+        <div class="row mb-4 g-3" id="inventorySummaryCards">
+            <!-- Cards will be dynamically populated by JS -->
+            <div class="col-md-2">
+                <div class="card text-white bg-primary-dark">
+                    <div class="card-body">
+                        <h6 class="card-title">Total SKUs</h6>
+                        <h4 class="card-text" id="totalSKUs">0</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h6 class="card-title">Available Stock</h6>
+                        <h4 class="card-text" id="availableStock">0 m</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-danger">
+                    <div class="card-body">
+                        <h6 class="card-title">Out of Stock</h6>
+                        <h4 class="card-text" id="outOfStock">0</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h6 class="card-title">Low Stock</h6>
+                        <h4 class="card-text" id="lowStock">0</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary-dark">Last Updated</h6>
+                        <p class="card-text" id="lastUpdated">N/A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- � 2. Filters & Search -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header card-header-custom text-primary-dark fw-bold">
+                <i class="fas fa-filter me-2"></i>Filters & Search
+            </div>
+            <div class="card-body">
+                <form class="row g-3" id="filterForm">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="searchSKU" placeholder="Search by SKU Code" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="searchProductName" placeholder="Search by Product Name" />
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterCategory">
+                            <option value="">All Categories</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterSupplier">
+                            <option value="">All Suppliers</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterFabricType">
+                            <option value="">All Fabric Types</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterColor">
+                            <option value="">All Colors</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterWarehouse">
+                            <option value="">All Warehouses</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="filterStockStatus">
+                            <option value="">All Statuses</option>
+                            <option value="In Stock">In Stock</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                            <option value="Low Stock">Low Stock</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" class="form-control" id="filterLastRestockDate" title="Last Restock Date On/After"/>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="button" class="btn btn-primary-dark me-2" id="applyFiltersBtn"><i class="fas fa-search me-1"></i> Apply Filters</button>
+                        <button type="button" class="btn btn-outline-secondary" id="resetFiltersBtn"><i class="fas fa-undo me-1"></i> Reset Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 📋 3. Inventory Table View -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header card-header-custom text-primary-dark fw-bold">
+                <i class="fas fa-boxes me-2"></i>Current Inventory
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>SKU</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Supplier</th>
+                            <th>Available Qty</th>
+                            <th>Unit</th>
+                            <th>Reserved</th>
+                            <th>Incoming</th>
+                            <th>Price/unit</th>
+                            <th>Last Restock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- Table rows will be dynamically populated by JS -->
+                        <tr><td colspan="12" class="text-center text-muted">Loading inventory data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- 📥 4. Stock In (Add Inventory) -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header card-header-custom text-primary-dark fw-bold">
+                        <i class="fas fa-plus-circle me-2"></i>Add New Stock
+                    </div>
+                    <div class="card-body">
+                        <form id="addStockForm" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="addStockProduct" class="form-label">Select Product</label>
+                                <select class="form-select" id="addStockProduct" required>
+                                    <option value="">Choose...</option>
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockBatch" class="form-label">Batch Number</label>
+                                <input type="text" class="form-control" id="addStockBatch" placeholder="e.g., BATCH-202507-001">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="addStockQuantity" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockUnit" class="form-label">Unit</label>
+                                <input type="text" class="form-control" id="addStockUnit" placeholder="e.g., Meters" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockSupplier" class="form-label">Supplier</label>
+                                <select class="form-select" id="addStockSupplier" required>
+                                    <option value="">Choose...</option>
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockPurchasePrice" class="form-label">Purchase Price/Unit</label>
+                                <input type="number" class="form-control" id="addStockPurchasePrice" min="0" step="0.01" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockDate" class="form-label">Date of Purchase</label>
+                                <input type="date" class="form-control" id="addStockDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="addStockExpiry" class="form-label">Expiry Date (Optional)</label>
+                                <input type="date" class="form-control" id="addStockExpiry">
+                            </div>
+                            <div class="col-12">
+                                <label for="addStockInvoice" class="form-label">Upload Invoice (PDF/Image)</label>
+                                <input type="file" class="form-control" id="addStockInvoice" accept=".pdf,image/*">
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-gold"><i class="fas fa-plus me-1"></i> Add Stock</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📤 5. Stock Out / Transfer -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header card-header-custom text-primary-dark fw-bold">
+                        <i class="fas fa-minus-circle me-2"></i>Stock Out / Transfer
+                    </div>
+                    <div class="card-body">
+                        <form id="stockOutForm" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="stockOutSKU" class="form-label">Select SKU</label>
+                                <select class="form-select" id="stockOutSKU" required>
+                                    <option value="">Choose...</option>
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="stockOutQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="stockOutQuantity" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="stockOutReason" class="form-label">Reason</label>
+                                <select class="form-select" id="stockOutReason" required>
+                                    <option value="">Choose...</option>
+                                    <option value="Sale">Sale</option>
+                                    <option value="Return">Customer Return</option>
+                                    <option value="Damage">Damage</option>
+                                    <option value="Transfer">Transfer</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" id="stockOutDestinationGroup" style="display: none;">
+                                <label for="stockOutDestination" class="form-label">Destination (Warehouse)</label>
+                                <select class="form-select" id="stockOutDestination">
+                                    <option value="">Choose...</option>
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="stockOutRemarks" class="form-label">Remarks</label>
+                                <textarea class="form-control" id="stockOutRemarks" rows="2"></textarea>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-minus me-1"></i> Process Stock Out</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📉 6. Low Stock Alerts & Notifications -->
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-warning text-white fw-bold">
+                <i class="fas fa-exclamation-triangle me-2"></i>Low Stock Alerts
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush" id="lowStockAlertsList">
+                    <!-- Alerts will be dynamically populated by JS -->
+                    <li class="list-group-item text-muted">No low stock alerts at the moment.</li>
+                </ul>
+                <div class="text-end mt-3">
+                    <button class="btn btn-outline-danger" id="sendRestockRequestBtn"><i class="fas fa-paper-plane me-1"></i> Send Restock Request</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📆 7. Inventory Logs / History -->
+        <div class="card mt-4 mb-4 shadow-sm">
+            <div class="card-header card-header-custom text-primary-dark fw-bold">
+                <i class="fas fa-history me-2"></i>Inventory Logs
+            </div>
+            <div class="card-body table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-bordered table-striped align-middle text-center">
+                    <thead class="table-light sticky-top" style="top: 0;">
+                        <tr>
+                            <th>Date</th>
+                            <th>Action</th>
+                            <th>SKU</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>By Whom</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryLogsTableBody">
+                        <!-- Logs will be dynamically populated by JS -->
+                        <tr><td colspan="7" class="text-center text-muted">No recent inventory logs.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Placeholder Sections for future expansion -->
+        <div class="row g-4 mt-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header card-header-custom text-primary-dark fw-bold">
+                        <i class="fas fa-upload me-2"></i>Bulk Import/Export
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Upload inventory via Excel/CSV or export current data.</p>
+                        <button class="btn btn-outline-primary me-2"><i class="fas fa-file-excel me-1"></i> Import CSV</button>
+                        <button class="btn btn-outline-success"><i class="fas fa-download me-1"></i> Export CSV</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header card-header-custom text-primary-dark fw-bold">
+                        <i class="fas fa-map-marker-alt me-2"></i>Warehouse Location Mapping
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Manage stock across multiple warehouses.</p>
+                        <button class="btn btn-outline-info"><i class="fas fa-exchange-alt me-1"></i> Transfer Stock Between Warehouses</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📈 Analytics Section -->
+        <div class="card mt-4 mb-4 shadow-sm">
+            <div class="card-header card-header-custom text-primary-dark fw-bold">
+                <i class="fas fa-chart-line me-2"></i>Inventory Analytics
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Visual insights into your inventory performance (e.g., stock value, turnover rate).</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="alert alert-info" role="alert">
+                            Graph: Stock value over time (Placeholder)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info" role="alert">
+                            Graph: Top 10 stocked fabrics (Placeholder)
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted mt-3">More detailed reports available in the Reports section.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your custom JavaScript for dynamic data and logic -->
+    <script src="script.js"></script>
+</body>
+</html>
+�
