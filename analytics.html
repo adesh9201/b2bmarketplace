@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FabricHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="styles.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body,
+        html {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .navbar-brand {
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body data-theme="light" style="padding-top: 20px;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <span class="me-2" style="width:32px;height:32px;display:inline-block;vertical-align:middle;">
+                    <!-- Modern SVG logo -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#paint0_linear)" />
+                        <path d="M8 24L24 8M8 8l16 16" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#7B2FF2" />
+                                <stop offset="1" stop-color="#F357A8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                FabricHub
+            </a>
+
+            <button class="btn btn-outline-light d-lg-none me-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="sidebarOffcanvas">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="suppliers.html">Suppliers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-search me-1"></i>Search
+                        </button>
+                        <div class="dropdown-menu p-3" style="width: 300px;">
+                            <input type="text" class="form-control" id="supplierSearch"
+                                placeholder="Search suppliers...">
+                        </div>
+                    </div>
+                    <a href="cart.html" class="btn btn-outline-light me-2 position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            id="cart-count">0</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            id="userDropdown">
+                            <i class="fas fa-user me-1"></i>Account
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Login</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#registerModal">Register</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item active" href="dashboard.html">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn" style="display: none;">Logout</a></li>
+                        </ul>
+                    </div>
+                    <button id="darkModeToggle" class="btn btn-outline-light ms-3" title="Toggle dark mode"
+                        aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-lg-2 px-0 bg-light border-end min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-lg-start py-3 px-2">
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-house-door-fill fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Dashboard</span>
+                    </a>
+                    <a href="order.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-box fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Orders</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-list-task fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Product Catalog</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-building fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Inventory</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-currency-dollar fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Pricing</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-shield-check fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Claims</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-credit-card fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Payments</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-truck fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Logistics</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-bar-chart-line fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Analytics</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-megaphone fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Marketing</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-star fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Reviews</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-question-circle fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Support</span>
+                    </a>
+                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                        <i class="bi bi-gear fs-5"></i>
+                        <span class="d-none d-lg-inline ms-2">Account Settings</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col px-4">
+                <section class="bg-light py-5">
+                    <div class="container-fluid">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="vendorScreen.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Analytics</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h1 class="fw-bold mb-2">Seller Analytics</h1>
+                                <p class="text-muted mb-0">Manage your Analytics and track your business</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <button class="btn btn-primary ripple" data-bs-toggle="modal"
+                                    data-bs-target="#addProductModal">
+                                    <i class="fas fa-plus me-2"></i>Add New Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard Content -->
+                <section class="py-5">
+                    <div class="container">
+
+                        <!-- Dashboard Tabs -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card border-0 shadow-sm animate-on-scroll">
+                                    <div class="card-header bg-white">
+                                        <ul class="nav nav-tabs card-header-tabs" id="dashboardTabs" role="tablist">
+
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="analytics-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#analytics" type="button" role="tab">
+                                                    <i class="fas fa-chart-line me-2"></i>Analytics
+                                                </button>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content" id="dashboardTabContent">
+                                          
+
+
+                                            <!-- Analytics Tab -->
+                                            <div class="tab-pane fade" id="analytics" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="card border-0 shadow-sm animate-on-scroll">
+                                                            <div class="card-header bg-white">
+                                                                <h6 class="mb-0">Sales Overview</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <canvas id="salesChart" height="300"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="card border-0 shadow-sm animate-on-scroll">
+                                                            <div class="card-header bg-white">
+                                                                <h6 class="mb-0">Top Products</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div id="topProducts">
+                                                                    <!-- Top products will be loaded here -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Add Product Modal -->
+                <div class="modal fade" id="addProductModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content dark-mode-bg">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New Product</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addProductForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="productName" class="form-label">Product Name</label>
+                                                <input type="text" class="form-control" id="productName" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCategory" class="form-label">Category</label>
+                                                <select class="form-select" id="productCategory" required>
+                                                    <option value="">Select category</option>
+                                                    <option value="Cotton">Cotton</option>
+                                                    <option value="Silk">Silk</option>
+                                                    <option value="Wool">Wool</option>
+                                                    <option value="Synthetic">Synthetic</option>
+                                                    <option value="Linen">Linen</option>
+                                                    <option value="Velvet">Velvet</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productPrice" class="form-label">Price ($)</label>
+                                                <input type="number" class="form-control" id="productPrice" step="0.01"
+                                                    required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productStock" class="form-label">Stock Quantity</label>
+                                                <input type="number" class="form-control" id="productStock" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="productMaterial" class="form-label">Material</label>
+                                                <input type="text" class="form-control" id="productMaterial" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productWeight" class="form-label">Weight (GSM)</label>
+                                                <input type="text" class="form-control" id="productWeight" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productWidth" class="form-label">Width</label>
+                                                <input type="text" class="form-control" id="productWidth" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productImage" class="form-label">Product Image URL</label>
+                                                <input type="url" class="form-control" id="productImage" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="productDescription" class="form-label">Description</label>
+                                        <textarea class="form-control" id="productDescription" rows="3"
+                                            required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="productColors" class="form-label">Available Colors
+                                            (comma-separated)</label>
+                                        <input type="text" class="form-control" id="productColors"
+                                            placeholder="White, Blue, Red, Green">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary ripple"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary ripple" onclick="addProduct()">Add
+                                    Product</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Modal -->
+                <div class="modal fade" id="loginModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content dark-mode-bg">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Login</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="loginForm">
+                                    <div class="mb-3">
+                                        <label for="loginEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="loginEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="loginPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="loginPassword" required>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 ripple">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register Modal -->
+                <div class="modal fade" id="registerModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content dark-mode-bg">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Register</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="registerForm">
+                                    <div class="mb-3">
+                                        <label for="registerName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="registerName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="registerEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="registerEmail" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="registerPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="registerPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="userType" class="form-label">Account Type</label>
+                                        <select class="form-select" id="userType" required>
+                                            <option value="">Select account type</option>
+                                            <option value="buyer">Buyer</option>
+                                            <option value="seller">Seller</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 ripple">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Detail Modal -->
+                <div class="modal fade" id="orderDetailModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content dark-mode-bg">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Order Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body" id="orderDetailBody">
+                                <!-- Order details will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="vendorScreen.js"></script>
+    <script>
+        // Dark mode toggle logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        function setDarkMode(enabled) {
+            if (enabled) {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('darkMode', 'true');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('darkMode', 'false');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        darkModeToggle.addEventListener('click', () => {
+            setDarkMode(body.getAttribute('data-theme') !== 'dark');
+        });
+        // On load, set dark mode from localStorage
+        if (localStorage.getItem('darkMode') === 'true') setDarkMode(true);
+    </script>
+</body>
+
+</html>
