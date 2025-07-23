@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts: Inter and Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
+ <link href="styles.css" rel="stylesheet">
     <style>
         /* Custom Brand Colors (Minimal CSS) */
         body {
@@ -69,30 +69,85 @@
     </style>
 </head>
 <body class="bg-light">
-    <!-- Navigation Bar (Optional, but good for context) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-dark shadow-sm">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold d-flex align-items-center gap-2 font-poppins" href="#">
-                <i class="fas fa-warehouse"></i> FabricHub Inventory
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <span class="me-2" style="width:32px;height:32px;display:inline-block;vertical-align:middle;">
+                    <!-- Modern SVG logo -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#paint0_linear)" />
+                        <path d="M8 24L24 8M8 8l16 16" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#7B2FF2" />
+                                <stop offset="1" stop-color="#F357A8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                FabricHub
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+            <button class="btn btn-outline-light d-lg-none me-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="sidebarOffcanvas">
+                <i class="bi bi-list"></i>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
+                        <a class="nav-link" href="catalog.html">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reports</a>
+                        <a class="nav-link active" href="suppliers.html">Suppliers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Settings</a>
+                        <a class="nav-link" href="about.html">About</a>
                     </li>
                 </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-search me-1"></i>Search
+                        </button>
+                        <div class="dropdown-menu p-3" style="width: 300px;">
+                            <input type="text" class="form-control" id="supplierSearch"
+                                placeholder="Search suppliers...">
+                        </div>
+                    </div>
+                    <a href="cart.html" class="btn btn-outline-light me-2 position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            id="cart-count">0</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            id="userDropdown">
+                            <i class="fas fa-user me-1"></i>Account
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Login</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#registerModal">Register</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item active" href="dashboard.html">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn" style="display: none;">Logout</a></li>
+                        </ul>
+                    </div>
+                    <button id="darkModeToggle" class="btn btn-outline-light ms-3" title="Toggle dark mode"
+                        aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -447,4 +502,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-�

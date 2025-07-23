@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
           <p class="text-muted small mb-2">${product.description}</p>
           <div class="fw-bold mb-2" style="color:#bfa046;">$${product.price.toFixed(2)} / ${product.unit || 'yard'}</div>
           <div class="d-flex justify-content-center gap-2 mt-auto">
-            <button class="btn btn-gold btn-sm ripple">Buy Now</button>
-            <button class="btn btn-outline-gold btn-sm ripple">View Details</button>
+            <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
+            <button class="btn btn-outline-primary btn-sm ripple">View Details</button>
           </div>
         </div>
       </div>
